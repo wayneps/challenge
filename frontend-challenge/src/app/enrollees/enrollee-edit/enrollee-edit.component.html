@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            ngModel
+            required
+          >
+        </div>
+        <div class="col-sm-4 form-group">
+          <label for="name">Birth Date</label>
+          <input
+            type="date"
+            id="birthDate"
+            class="form-control"
+            name="birthDate"
+            [(ngModel)]="today"
+            required
+          >
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="id">ID Number</label>
+          <input
+            type="text"
+            id="id"
+            readonly
+            class="form-control-plaintext"
+            name="id"
+            ngModel
+          >
+        </div>
+        <div  class="col-sm-7 form-group" *ngFor="let state of states">
+          <label>
+            <input
+              type="radio"
+              name="active"
+              ngModel
+              [value]="state"
+              required>
+            {{ state | status }}
+          </label>
+        </div>           
+      </div>
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            (click)="onDelete()"
+            *ngIf="editMode">Delete</button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

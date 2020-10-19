@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-xs-12">
+    <app-enrollee-edit></app-enrollee-edit>
+    <hr>
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let enrollee of enrollees let i = index"
+        (click)="onEditItem(i)"
+      >
+      <span
+        class="badge">
+        {{ enrollee.active | status }}
+      </span>
+      	<strong>Name:</strong>  {{ enrollee.name }} | <strong> Date of birth:</strong> {{ enrollee.birthDate | date: 'longDate' }} | <strong> ID:</strong> {{ enrollee.id }}
+      </a>
+    </ul>
+  </div>
+</div>
