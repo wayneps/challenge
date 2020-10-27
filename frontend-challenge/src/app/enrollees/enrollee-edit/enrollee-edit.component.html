@@ -9,7 +9,7 @@
             id="name"
             class="form-control"
             name="name"
-            ngModel
+            [(ngModel)]="name"
             required
           >
         </div>
@@ -53,13 +53,19 @@
           <button
             class="btn btn-success"
             type="submit"
-            [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
-          <button
-            class="btn btn-danger"
-            type="button"
-            (click)="onDelete()"
-            *ngIf="editMode">Delete</button>
-          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+            [disabled]="!f.valid">Update
+          </button>
+          <button 
+          	class="btn btn-primary" 
+          	type="button" 
+          	(click)="onClear()">Clear
+          </button>
+          <button 
+          	class="btn btn-warning" 
+          	type="button" 
+          	(click)="onSearch()"
+          	[disabled]="name === ''">Search
+          </button>          
         </div>
       </div>
     </form>

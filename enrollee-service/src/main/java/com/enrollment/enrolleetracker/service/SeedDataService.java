@@ -99,6 +99,36 @@ public class SeedDataService {
 		dependent42.setEnrollee(enrollee4);
 		dependentRepository.save(dependent42);
 		
+		Enrollee enrollee5 = new Enrollee();
+		enrollee5.setName("Lars Ulrich");
+		enrollee5.setBirthDate(LocalDate.now().minusYears(33));
+		enrollee5.setActive(true);		
+		enrolleeRepository.save(enrollee5);
+		
+		Enrollee enrollee6 = new Enrollee();
+		enrollee6.setName("Buddy Holey");
+		enrollee6.setBirthDate(LocalDate.now().minusYears(58));
+		enrollee6.setActive(true);		
+		enrolleeRepository.save(enrollee6);
+		
+		Enrollee enrollee7 = new Enrollee();
+		enrollee7.setName("Babe Ruth");
+		enrollee7.setBirthDate(LocalDate.now().minusYears(23));
+		enrollee7.setActive(true);		
+		enrolleeRepository.save(enrollee7);
+		
+		Enrollee enrollee8 = new Enrollee();
+		enrollee8.setName("Jackie Robinson");
+		enrollee8.setBirthDate(LocalDate.now().minusYears(48));
+		enrollee8.setActive(true);		
+		enrolleeRepository.save(enrollee8);
+		
+		Enrollee enrollee9 = new Enrollee();
+		enrollee9.setName("Harriet Tubman");
+		enrollee9.setBirthDate(LocalDate.now().minusYears(68));
+		enrollee9.setActive(true);		
+		enrolleeRepository.save(enrollee9);		
+		
 		
 		for (Enrollee enrollee : enrolleeRepository.findAll()) {
 			log.info(enrollee.toString());

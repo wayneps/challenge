@@ -1,6 +1,7 @@
 package com.enrollment.enrolleetracker.controller;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,15 @@ public class EnrolleeController {
 	@GetMapping("/enrollees")
 	public Iterable<Enrollee> retreiveEnrollees() {
 		return enrolleeService.findAll();
+	}
+	
+	@GetMapping("/enrollees/{page}/{size}")
+	public Iterable<Enrollee> retreivePaginatedEnrollees(@PathVariable Integer page, @PathVariable Integer size) {
+		return enrolleeService.findAllPaginated(page, size);
+	}
+	@GetMapping("/enrollees/search/{name}")
+	public Iterable<Enrollee> retreiveByNameEnrollees(@PathVariable String name) {
+		return enrolleeService.findByNameContaining(name);
 	}
 	
 	@GetMapping("/enrollees/{enrolleeId}")

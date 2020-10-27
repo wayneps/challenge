@@ -4,7 +4,11 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.enrollment.enrolleetracker.jpa.Dependent;
 import com.enrollment.enrolleetracker.jpa.Enrollee;
@@ -29,6 +33,20 @@ public class EnrolleeService {
 		return enrolleeRepository.findAll();
 	}
 	
+	
+	public Iterable<Enrollee> findAllPaginated(Integer page, Integer size) {
+
+        Pageable paging = PageRequest.of(page, size);
+        Page<Enrollee> pagedResult = enrolleeRepository.findAll(paging);
+		return pagedResult.toList();
+	}
+	
+	public Iterable<Enrollee> findByNameContaining(String name) {
+		
+		return enrolleeRepository. findByNameContaining(name);
+
+	}	
+	
 	public Optional<Enrollee> findById(Long id) {
 		return enrolleeRepository.findById(id);
 	}
@@ -48,5 +66,5 @@ public class EnrolleeService {
 	
 	public Iterable<Dependent> findDependentsByEnrolleeId(Long enrolleeId) {
 		return dependentService.findByEnrollee(enrolleeRepository.findById(enrolleeId).get());
-	}	
+	}
 }

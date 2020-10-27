@@ -3,17 +3,25 @@ import { Subscription } from 'rxjs';
 
 import { Enrollee } from '../enrollees/enrollee.model';
 import { EnrolleesService } from './enrollees.service';
+import { DataService } from '../model/data.service';
 
 @Component({
   selector: 'app-enrollees',
   templateUrl: './enrollees.component.html',
-  styleUrls: ['./enrollees.component.css']
+  styleUrls: ['./enrollees.component.css'],
+
 })
 export class EnrolleesComponent implements OnInit, OnDestroy {
   enrollees: Enrollee[];
+  currentTutorial = null;
+  currentIndex = -1;
+  page = 1;
+  count = 0;
+  pageSize = 3;
+  pageSizes = [3, 6, 9];
   private subscription: Subscription;
 
-  constructor(private elService: EnrolleesService) { }
+  constructor(private dataService: DataService, private elService: EnrolleesService) { }
 
   ngOnInit() {
     this.enrollees = this.elService.getEnrollees();
@@ -39,5 +47,25 @@ export class EnrolleesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getColor(enrollee: Enrollee){
+	return enrollee.active === true ? 'lightGreen' : 'lightYellow';
+  }
+
+  setActiveEnrollee(enrollee: Enrollee, index: number) : void{
+	
+  }
+
+  handlePageChange(event): void {
+    this.page = event;
+	this.dataService.loadEnrollees();
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+	this.dataService.loadEnrollees();
+
   }
 }

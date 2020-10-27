@@ -46,4 +46,34 @@ export class DataService {
         console.log(enrollees);
       });
   }
+
+  pageEnrollees(page: number, size: number) {
+	let username='admin1'
+    let password='password1'
+	let uri=environment.apiUrl + '/enrollees/' + page + '/' + size
+	const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });	
+	console.log('pageEnrollees');
+	console.log(uri);
+    return this.http.get<Enrollee[]>(uri, {headers})
+      .subscribe(enrollees => {
+		this.enrolleesService.clearEnrollees();
+		this.enrolleesService.addEnrollees(enrollees);
+        console.log(enrollees);
+      });
+  }
+
+  searchEnrollees(name: string) {
+	let username='admin1'
+    let password='password1'
+	let uri=environment.apiUrl + '/enrollees/search/' + name
+	const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });	
+	console.log('searchEnrollees');
+	console.log(uri);
+    return this.http.get<Enrollee[]>(uri, {headers})
+      .subscribe(enrollees => {
+		this.enrolleesService.clearEnrollees();
+		this.enrolleesService.addEnrollees(enrollees);
+        console.log(enrollees);
+      });
+  }
 }
