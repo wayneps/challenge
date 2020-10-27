@@ -1,6 +1,6 @@
 export class Enrollee {
   constructor(	public name: string, 
-			  	public birthDate: string, 
+			  	public dateOfBirth: string, 
 				public id: string, 
 				public update: boolean,				
 				public active: boolean) {}

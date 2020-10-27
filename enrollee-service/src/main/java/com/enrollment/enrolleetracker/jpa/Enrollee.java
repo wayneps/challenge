@@ -47,7 +47,7 @@ public class Enrollee {
 	
 	@Column(nullable = false)
 	@NotNull(message = "Date of birth is required")		
-	private LocalDate birthDate;
+	private LocalDate dateOfBirth;
 	
 	@Column
 	private boolean active;
@@ -65,12 +65,12 @@ public class Enrollee {
 		this.name = name;
 	}
 
-	public LocalDate getBirthDate() {
-		return birthDate;
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public boolean getActive() {
@@ -91,6 +91,6 @@ public class Enrollee {
 	
 	@Override
 	public String toString() {
-		return "Enrollee [name=" + name + ", birthDate=" + birthDate + ", status=" + active + "]";
+		return "Enrollee [name=" + name + ", birthDate=" + dateOfBirth + ", status=" + active + "]";
 	}	
 }

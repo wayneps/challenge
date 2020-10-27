@@ -55,10 +55,10 @@ public class EnrolleeTrackerEntityTest {
 		return enrollee;
 	}
 	
-	private Dependent addDependent(final Long enrolleeId, final String name, final LocalDate birthDate) {
+	private Dependent addDependent(final Long enrolleeId, final String name, final LocalDate dateOfBirth) {
 		Dependent dependent= new Dependent();
 		dependent.setName(name);;
-		dependent.setBirthDate(birthDate.minusYears(67));
+		dependent.setDateOfBirth(dateOfBirth.minusYears(67));
 		String url = host + port + enrolleeResource + "/" + enrolleeId+"/dependent";
 		log.info(url);
 		ResponseEntity<Dependent> responseEntity = template.withBasicAuth(
@@ -67,11 +67,11 @@ public class EnrolleeTrackerEntityTest {
 		return responseEntity.getBody();
 	}
 
-	private Enrollee addEnrollee(final String name, final LocalDate birthDate, final boolean active) {
+	private Enrollee addEnrollee(final String name, final LocalDate dateOfBirth, final boolean active) {
 		
 		Enrollee enrollee = new Enrollee();
 		enrollee.setName(name);
-		enrollee.setBirthDate(birthDate.minusYears(67));
+		enrollee.setDateOfBirth(dateOfBirth.minusYears(67));
 		enrollee.setActive(active);		
 		String url = host + port + enrolleeResource;
 		log.info(url);
@@ -84,12 +84,12 @@ public class EnrolleeTrackerEntityTest {
 	@Test
 	public void testAddEnrollee() {
 		String name = "name";
-		LocalDate birthDate = LocalDate.now().minusYears(14);
+		LocalDate dateOfBirth = LocalDate.now().minusYears(14);
 		boolean active = true;
-		Enrollee enrollee = addEnrollee(name, birthDate, active);
+		Enrollee enrollee = addEnrollee(name, dateOfBirth, active);
 		assertNotNull(enrollee.getId());
 		assertEquals(name, enrollee.getName());
-		assertEquals(birthDate, enrollee.getBirthDate().plusYears(67));
+		assertEquals(dateOfBirth, enrollee.getDateOfBirth().plusYears(67));
 		assertEquals(active, enrollee.getActive());
 	}
 	
@@ -108,10 +108,10 @@ public class EnrolleeTrackerEntityTest {
 	public void testAddRetrieveRemoveEnrollee() {
 		
 		String name = "name";
-		LocalDate birthDate = LocalDate.now().minusYears(35);
+		LocalDate dateOfBirth = LocalDate.now().minusYears(35);
 		boolean active = true;
 		
-		Enrollee enrollee = addEnrollee(name, birthDate, active);
+		Enrollee enrollee = addEnrollee(name, dateOfBirth, active);
 		assertNotNull(enrollee.getId());
 		String url = enrolleeResource + "/" + enrollee.getId();
 		log.info(url);
@@ -122,7 +122,7 @@ public class EnrolleeTrackerEntityTest {
 		assertNotNull(enrollee.getId());
 		assertEquals(name, enrollee.getName());
 		assertEquals(active, enrollee.getActive());
-		assertEquals(birthDate, enrollee.getBirthDate().plusYears(67));
+		assertEquals(dateOfBirth, enrollee.getDateOfBirth().plusYears(67));
 		
 		template.withBasicAuth(
 				  "admin1", "password1").delete(url);
@@ -148,7 +148,7 @@ public class EnrolleeTrackerEntityTest {
 		assertNotNull(enrollee.getId());
 		Dependent dependent= new Dependent();
 		dependent.setName(null);
-		dependent.setBirthDate(LocalDate.now().minusYears(14));
+		dependent.setDateOfBirth(LocalDate.now().minusYears(14));
 		String url = host + port + enrolleeResource + "/" + enrollee.getId() + "/dependent";
 		log.info(url);
 		ResponseEntity<Dependent> responseEntity = template.withBasicAuth(
@@ -205,11 +205,11 @@ public class EnrolleeTrackerEntityTest {
 		
 		String name = "name";
 		String lastName = "last name";
-		LocalDate birthDate = LocalDate.now().minusYears(14);
-		Dependent dependent = addDependent(enrollee.getId(), name, birthDate);
+		LocalDate dateOfBirth = LocalDate.now().minusYears(14);
+		Dependent dependent = addDependent(enrollee.getId(), name, dateOfBirth);
 		assertNotNull(dependent.getId());
 		assertEquals(name, dependent.getName());
-		assertEquals(birthDate, dependent.getBirthDate().plusYears(67));
+		assertEquals(dateOfBirth, dependent.getDateOfBirth().plusYears(67));
 		log.info(enrollee.toString());
 		String url =  host + port + dependentResource + "/" + dependent.getId();
 		log.info(url);

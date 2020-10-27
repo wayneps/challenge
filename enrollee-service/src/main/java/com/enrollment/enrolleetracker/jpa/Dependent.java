@@ -41,7 +41,7 @@ public class Dependent {
 	
 	@Column(nullable = false)
 	@NotNull(message = "Date of birth is required")		
-	private LocalDate birthDate;
+	private LocalDate dateOfBirth;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -56,12 +56,12 @@ public class Dependent {
 	}
 
 
-	public LocalDate getBirthDate() {
-		return birthDate;
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public void setEnrollee(Enrollee sourceEnrollee) {
@@ -79,7 +79,7 @@ public class Dependent {
 	
 	@Override
 	public String toString() {
-		return "Dependent [name=" + name + ", birthDate=" + birthDate + "]";
+		return "Dependent [name=" + name + ", birthDate=" + dateOfBirth + "]";
 	}
 	
 }

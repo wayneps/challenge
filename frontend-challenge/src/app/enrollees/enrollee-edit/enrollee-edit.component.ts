@@ -45,7 +45,7 @@ export class EnrolleeEditComponent implements OnInit, OnDestroy  {
 		  this.name = this.eService.getEnrollee(index).name;
           this.elForm.setValue({
             name: this.editedItem.name,
-            birthDate: this.editedItem.birthDate,
+            dateOfBirth: this.editedItem.dateOfBirth,
 			active: this.editedItem.active,
 			id: this.editedItem.id
           })
@@ -56,7 +56,7 @@ export class EnrolleeEditComponent implements OnInit, OnDestroy  {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newEnrollee = new Enrollee(value.name, value.birthDate, value.id, value.update, value.active);
+    const newEnrollee = new Enrollee(value.name, value.dateOfBirth, value.id, value.update, value.active);
     if (this.editMode) {
       this.eService.updateEnrollee(this.editedItemIndex, newEnrollee);
     } else {
