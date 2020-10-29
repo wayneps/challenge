@@ -1,6 +1,8 @@
 package com.enrollment.enrolleetracker.jpa;
 
 import java.time.LocalDate;
+import java.util.UUID;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +35,8 @@ public class Dependent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	//private Long id;
+	private UUID id;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Name is required")		
@@ -55,7 +58,6 @@ public class Dependent {
 		this.name = name;
 	}
 
-
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -69,12 +71,12 @@ public class Dependent {
 		enrollee = sourceEnrollee;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
+	}
+	
+	public UUID getId() {
+		return id;
 	}
 	
 	@Override

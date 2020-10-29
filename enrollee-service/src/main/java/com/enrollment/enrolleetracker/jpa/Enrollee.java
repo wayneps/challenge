@@ -2,12 +2,11 @@ package com.enrollment.enrolleetracker.jpa;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +37,8 @@ public class Enrollee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	//private Long id;
+	private UUID id;
 	
 	@Column(nullable = false)
 	@NotBlank(message = "Name is required")		
@@ -81,13 +81,15 @@ public class Enrollee {
 		this.active = active;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
+	
+	public UUID getId() {
+		return id;
+	}
+	
+
 	
 	@Override
 	public String toString() {

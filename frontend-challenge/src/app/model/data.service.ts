@@ -12,23 +12,27 @@ export class DataService {
   storeEnrollees() {
 	let username='admin1'
     let password='password1'
+	let uri=environment.apiUrl + '/enrollees/'
 	const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     const enrollees = this.enrolleesService.getEnrollees();
 	const removedIds = this.enrolleesService.getRemovedIds();
+	console.log('storeEnrollees');	
 	console.log(enrollees);
 	for (let enrollee of enrollees) {
       if(enrollee.update){
 	
-		  this.http.post(environment.apiUrl + '/enrollees',enrollee, {headers})
+		  this.http.put(uri + enrollee.id, enrollee, {headers})
 	      .subscribe(response => {
+			console.log(uri + enrollee.id);
 	        console.log(response);
 	      });
 	  }
     }
 	for (let removedId of removedIds) {
 		
-	  this.http.delete(environment.apiUrl + '/enrollees/' + removedId, {headers})
+	  this.http.delete(uri + removedId, {headers})
       .subscribe(response => {
+		console.log(uri + removedId);	
         console.log(response);
       });
     }

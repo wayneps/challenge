@@ -19,8 +19,7 @@ export class EnrolleesService {
     return this.removedIds;
   }
 
-  addEnrollee(enrollee: Enrollee) {
-	enrollee.update = true;	
+  addEnrollee(enrollee: Enrollee) {	
     this.enrollees.push(enrollee);
     this.enrolleesChanged.next(this.enrollees.slice());
   }
@@ -28,6 +27,7 @@ export class EnrolleesService {
   addEnrollees(enrollees: Enrollee[]) {
 	console.log('addEnrollees');
     for (let enrollee of enrollees) {
+	enrollee.update = false;
       this.addEnrollee(enrollee);
     }
     this.enrolleesChanged.next(this.enrollees.slice());

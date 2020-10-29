@@ -2,7 +2,7 @@ package com.enrollment.enrolleetracker.service;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class DependentService {
 		return dependentRepository.findAll();
 	}
 	
-	public Optional<Dependent> findById(Long id) {
+	public Optional<Dependent> findById(UUID id) {
 		return dependentRepository.findById(id);
 	}
 	
@@ -34,7 +34,7 @@ public class DependentService {
 		return dependentRepository.save(enrollee);
 	}	
 	
-	public void delete(Long id) {
+	public void delete(UUID id) {
 		dependentRepository.deleteById(id);
 	}	
 	

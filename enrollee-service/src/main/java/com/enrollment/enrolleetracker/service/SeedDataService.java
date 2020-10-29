@@ -12,7 +12,6 @@ import com.enrollment.enrolleetracker.jpa.Dependent;
 import com.enrollment.enrolleetracker.jpa.DependentRepository;
 import com.enrollment.enrolleetracker.jpa.Enrollee;
 import com.enrollment.enrolleetracker.jpa.EnrolleeRepository;
-import com.enrollment.enrolleetracker.jpa.Status;
 
 /**
  * @author waynes

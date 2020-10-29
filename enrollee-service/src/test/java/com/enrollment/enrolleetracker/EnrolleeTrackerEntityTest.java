@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDate;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import com.enrollment.enrolleetracker.jpa.Dependent;
 import com.enrollment.enrolleetracker.jpa.Enrollee;
-import com.enrollment.enrolleetracker.jpa.Status;
-
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import org.slf4j.Logger;
@@ -55,7 +55,7 @@ public class EnrolleeTrackerEntityTest {
 		return enrollee;
 	}
 	
-	private Dependent addDependent(final Long enrolleeId, final String name, final LocalDate dateOfBirth) {
+	private Dependent addDependent(final UUID enrolleeId, final String name, final LocalDate dateOfBirth) {
 		Dependent dependent= new Dependent();
 		dependent.setName(name);;
 		dependent.setDateOfBirth(dateOfBirth.minusYears(67));
@@ -135,7 +135,7 @@ public class EnrolleeTrackerEntityTest {
 	@WithMockUser(username = "user1", password = "password1")	
 	@Test
 	public void testNoDependent() {
-		String url = host + port + dependentResource + "/1";
+		String url = host + port + dependentResource + "/" + UUID.randomUUID();
 		log.info(url);
 		ResponseEntity<Dependent> responseEntity = template.withBasicAuth(
 				  "admin1", "password1").getForEntity(url, Dependent.class);
@@ -157,7 +157,7 @@ public class EnrolleeTrackerEntityTest {
 	}
 	@Test
 	public void testNoDependentForEnrollee() {
-		String url = host + port + enrolleeResource + "/3/dependents";
+		String url = host + port + enrolleeResource + "/" + UUID.randomUUID() + "/dependents";
 		log.info(url);
 		ResponseEntity<Dependent[]> responseEntity = template.withBasicAuth(
 				  "admin1", "password1").getForEntity(url, Dependent[].class);

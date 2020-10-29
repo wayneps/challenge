@@ -33,7 +33,7 @@ export class EnrolleeEditComponent implements OnInit, OnDestroy  {
 }
 
   ngOnInit() {
-	this.today = new Date().toISOString().split('T')[0];
+	this.today; // = new Date().toISOString().split('T')[0];
 	this.name = '';
 	this.defaultState = false
     this.subscription = this.eService.startedEditing

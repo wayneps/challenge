@@ -36,8 +36,8 @@ export class EnrolleesComponent implements OnInit, OnDestroy {
   filteredActive = '';
   getStateClasses(enrollee: {instanceType: string, name: string, date: string, id: string, status: string, active:boolean}) {
     return {
-      'list-group-item-success': enrollee.active === true,
-      'list-group-item-warning': enrollee.active === false
+      'table-success': enrollee.active === true,
+      'table-active': enrollee.active === false
        //'list-group-item-danger': enrollee.active === 'critical'
     };
   }
@@ -49,9 +49,14 @@ export class EnrolleesComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getColor(enrollee: Enrollee){
-	return enrollee.active === true ? 'lightGreen' : 'lightYellow';
+  getBackgroundColor(enrollee: Enrollee){
+	return enrollee.active === true ? 'lightBlue' : 'lightGrey';
   }
+
+  getColor(enrollee: Enrollee){
+	return enrollee.active === true ? 'black' : 'grey';
+  }
+
 
   setActiveEnrollee(enrollee: Enrollee, index: number) : void{
 	

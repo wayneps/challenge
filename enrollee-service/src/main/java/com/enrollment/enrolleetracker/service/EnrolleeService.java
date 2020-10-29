@@ -1,7 +1,7 @@
 package com.enrollment.enrolleetracker.service;
 
 import java.util.Optional;
-
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,7 +47,7 @@ public class EnrolleeService {
 
 	}	
 	
-	public Optional<Enrollee> findById(Long id) {
+	public Optional<Enrollee> findById(UUID id) {
 		return enrolleeRepository.findById(id);
 	}
 	
@@ -55,16 +55,16 @@ public class EnrolleeService {
 		return enrolleeRepository.save(enrollee);
 	}	
 	
-	public void delete(Long enrolleeId) {
+	public void delete(UUID enrolleeId) {
 		enrolleeRepository.deleteById(enrolleeId);
 	}	
 
-	public <S extends Dependent> S save(Long enrolleeId, S dependent) {
+	public <S extends Dependent> S save(UUID enrolleeId, S dependent) {
 		dependent.setEnrollee(enrolleeRepository.findById(enrolleeId).get());
 		return dependentService.save(dependent);
 	}
 	
-	public Iterable<Dependent> findDependentsByEnrolleeId(Long enrolleeId) {
+	public Iterable<Dependent> findDependentsByEnrolleeId(UUID enrolleeId) {
 		return dependentService.findByEnrollee(enrolleeRepository.findById(enrolleeId).get());
 	}
 }
